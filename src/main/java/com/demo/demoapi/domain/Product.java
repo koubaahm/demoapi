@@ -37,6 +37,15 @@ public class Product {
      protected  Product(){
 
     }
+    public Product(String name, String description, BigDecimal price) {
+        if (price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Price must be positive");
+        }
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.createdAt = LocalDateTime.now();
+    }
 
     public Product(Long id, String name, String description, BigDecimal price, LocalDateTime createdAt) {
         this.id = id;
@@ -46,8 +55,6 @@ public class Product {
         this.createdAt = createdAt;
     }
 
-    public Product(@NotBlank @Size(max = 150) String name, @Size(max = 500) String description, @NotNull @DecimalMin(value = "0.01") BigDecimal price) {
-    }
 
     public Long getId() {
         return id;
