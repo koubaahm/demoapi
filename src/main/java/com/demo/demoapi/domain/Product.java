@@ -1,6 +1,11 @@
 package com.demo.demoapi.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -58,6 +63,9 @@ public class Product {
     }
 
     public void update(String name, String description, BigDecimal price) {
+        if (price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Price must be positive");
+        }
         this.name = name;
         this.description = description;
         this.price = price;
