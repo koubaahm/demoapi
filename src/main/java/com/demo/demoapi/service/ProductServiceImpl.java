@@ -10,7 +10,8 @@ import com.demo.demoapi.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 @Service
 @Transactional
@@ -39,8 +40,8 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductResponse> getAll() {
-        return productRepository.findAll().stream().map(ProductMapper::toResponse).toList();
+    public Page<ProductResponse> getAll(Pageable pageable) {
+        return productRepository.findAll(pageable).map(ProductMapper::toResponse);
     }
 
     @Override
