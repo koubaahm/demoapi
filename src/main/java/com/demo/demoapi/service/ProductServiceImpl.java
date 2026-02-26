@@ -4,10 +4,9 @@ import com.demo.demoapi.domain.Product;
 import com.demo.demoapi.dto.ProductCreateRequest;
 import com.demo.demoapi.dto.ProductResponse;
 import com.demo.demoapi.dto.ProductUpdateRequest;
+import com.demo.demoapi.exception.ProductNotFoundException;
 import com.demo.demoapi.mapper.ProductMapper;
 import com.demo.demoapi.repository.ProductRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +33,7 @@ public class ProductServiceImpl implements ProductService{
     @Transactional(readOnly = true)
     public ProductResponse getById(Long id) {
 
-        Product product = productRepository.findById(id).orElseThrow(()->new EntityNotFoundException("product not found with id: " + id));
+        Product product = productRepository.findById(id).orElseThrow(()->new ProductNotFoundException(id));
         return ProductMapper.toResponse(product);
     }
 
@@ -46,7 +45,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductResponse update(Long id, ProductUpdateRequest productRequest) {
-        Product product = productRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("product not found with id: " + id));
+        Product product = productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException(id));
         product.update(
                 productRequest.name(),
                 productRequest.description(),
@@ -58,7 +57,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void delete(Long id) {
         if (!productRepository.existsById(id)) {
-            throw new EntityNotFoundException("product not found with id: " + id);
+            throw new ProductNotFoundException(id);
         }
         productRepository.deleteById(id);
     }

@@ -3,6 +3,7 @@ package com.demo.demoapi.service;
 import com.demo.demoapi.domain.Product;
 import com.demo.demoapi.dto.ProductCreateRequest;
 import com.demo.demoapi.dto.ProductUpdateRequest;
+import com.demo.demoapi.exception.ProductNotFoundException;
 import com.demo.demoapi.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ class ProductServiceImplTest {
         when(productRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> productService.getById(1L))
-                .isInstanceOf(EntityNotFoundException.class);
+                .isInstanceOf(ProductNotFoundException.class);
     }
 
     @Test
@@ -95,6 +96,6 @@ class ProductServiceImplTest {
         when(productRepository.existsById(1L)).thenReturn(false);
 
         assertThatThrownBy(() -> productService.delete(1L))
-                .isInstanceOf(EntityNotFoundException.class);
+                .isInstanceOf(ProductNotFoundException.class);
     }
 }
