@@ -4,13 +4,14 @@ import com.demo.demoapi.dto.ProductCreateRequest;
 import com.demo.demoapi.dto.ProductResponse;
 import com.demo.demoapi.dto.ProductUpdateRequest;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
 
     ProductResponse create(ProductCreateRequest request);
     ProductResponse getById(Long id);
-    List<ProductResponse> getAll();
+    Page<ProductResponse> getAll(Pageable pageable);
     ProductResponse update(Long id, ProductUpdateRequest request);
     void delete(Long id);
 }
