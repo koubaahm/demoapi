@@ -84,6 +84,16 @@ Rapport généré dans :
 
 target/site/jacoco/index.html
 
+## API Documentation
+
+Once the application is running, the OpenAPI documentation is available at:
+
+http://localhost:8080/swagger-ui.html
+
+The raw OpenAPI specification can be accessed at:
+
+http://localhost:8080/v3/api-docs
+
 ## Base de données
 
 - H2 in-memory
