@@ -15,7 +15,19 @@ REST API développée avec Spring Boot 3 et Java 21.
 - JaCoCo (rapport de couverture)
 - Docker
 
-## Prérequis
+---
+
+## Base URL
+
+All endpoints are versioned under:
+
+http://localhost:8080/api/v1
+
+Example:
+
+GET http://localhost:8080/api/v1/products
+
+---## Prérequis
 
 ### Option 1 — Maven
 
@@ -42,10 +54,6 @@ Démarrer l’application :
 ./mvnw spring-boot:run
 ```
 
-Application disponible sur :
-
-http://localhost:8080
-
 Health check :
 
 http://localhost:8080/actuator/health
@@ -64,9 +72,15 @@ Démarrer le container :
 docker run -p 8080:8080 demoapi
 ```
 
-Application disponible sur :
+## API Documentation
 
-http://localhost:8080
+Swagger UI :
+
+http://localhost:8080/swagger-ui.html
+
+OpenAPI specification :
+
+http://localhost:8080/v3/api-docs
 
 ## Lancer les tests
 
@@ -84,23 +98,11 @@ Rapport généré dans :
 
 target/site/jacoco/index.html
 
-## API Documentation
-
-Once the application is running, the OpenAPI documentation is available at:
-
-http://localhost:8080/swagger-ui.html
-
-The raw OpenAPI specification can be accessed at:
-
-http://localhost:8080/v3/api-docs
-
-All documented endpoints are prefixed with:
-
-/api/v1
-
 ## Base de données
 
 - H2 in-memory
+- Console H2
+- http://localhost:8080/h2-console
 - Migrations versionnées via Flyway
 - Hibernate configuré en validate
 - Open Session In View désactivé
