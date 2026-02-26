@@ -94,6 +94,10 @@ The raw OpenAPI specification can be accessed at:
 
 http://localhost:8080/v3/api-docs
 
+All documented endpoints are prefixed with:
+
+/api/v1
+
 ## Base de données
 
 - H2 in-memory

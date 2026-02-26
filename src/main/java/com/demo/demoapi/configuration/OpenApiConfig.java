@@ -13,7 +13,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Demo API")
-                        .version("1.0")
+                        .version("v1")
                         .description("Product management API"));
     }
 }
