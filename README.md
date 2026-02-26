@@ -104,6 +104,10 @@ target/site/jacoco/index.html
 - H2 in-memory
 - Console H2
 - http://localhost:8080/h2-console
+- Use the following connection settings:
+- JDBC URL: jdbc:h2:mem:testdb
+- Username: sa
+- Password: (leave empty)
 - Migrations versionnées via Flyway
 - Hibernate configuré en validate
 - Open Session In View désactivé
