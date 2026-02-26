@@ -5,9 +5,10 @@ import com.demo.demoapi.dto.ProductResponse;
 import com.demo.demoapi.dto.ProductUpdateRequest;
 import com.demo.demoapi.service.ProductService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -21,13 +22,15 @@ public class ProductController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse create(@Valid @RequestBody ProductCreateRequest productRequest) {
-        return productService.create(productRequest);
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductCreateRequest productRequest) {
+        ProductResponse product =productService.create(productRequest);
+        return ResponseEntity.created(URI.create("/products/" + product.id()))
+                .body(product);
     }
     @GetMapping("/{id}")
-    public ProductResponse getById(@PathVariable Long id) {
-        return productService.getById(id);
+    public ResponseEntity<ProductResponse> getById(@PathVariable Long id) {
+        ProductResponse product = productService.getById(id);
+        return ResponseEntity.ok(product);
     }
 
     @GetMapping
@@ -36,16 +39,17 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ProductResponse update(
+    public ResponseEntity<ProductResponse> update(
             @PathVariable Long id,
             @Valid @RequestBody ProductUpdateRequest productRequest
     ) {
-        return productService.update(id, productRequest);
+        ProductResponse product = productService.update(id, productRequest);
+        return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
+        return  ResponseEntity.noContent().build();
     }
 }
