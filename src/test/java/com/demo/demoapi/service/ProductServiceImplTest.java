@@ -5,7 +5,6 @@ import com.demo.demoapi.dto.ProductCreateRequest;
 import com.demo.demoapi.dto.ProductUpdateRequest;
 import com.demo.demoapi.exception.ProductNotFoundException;
 import com.demo.demoapi.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
